@@ -11,22 +11,27 @@
 | first_name_kanji   | string              | null: false             |
 | last_name_kana     | string              | null: false             |
 | first_name_kana    | string              | null: false             |
-| birthday           | string              | null: false             |
+| birthday           | date                | null: false             |
 
 
 ### Association
 
 * has_many :items
 * has_many :comments
+* has_many :orders
 
 ## items table
 
 | Column                              | Type       | Options           |
 |-------------------------------------|------------|-------------------|
-| item_name                           | string     | null: false       |
+| name                                | string     | null: false       |
 | item_description                    | text       | null: false       |
-| item_price                          | text       | null: false       |
-| user_id                             | references | foreign_key: true |
+| item_price                          | integer    | null: false       |
+| user                                | references | foreign_key: true |
+| item_status                         | string     | null: false       |
+| shipping                            | integer    | null: false       |
+| shipment_source                     | string     | null: false       |
+| shipping_day                        | integer    | null: false       |
 
 ### Association
 
@@ -39,8 +44,8 @@
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
 | text        | text       | null: false       |
-| item_id     | references | foreign_key: true |
-| user_id     | references | foreign_key: true |
+| item        | references | foreign_key: true |
+| user        | references | foreign_key: true |
 
 ### Association
 
@@ -51,22 +56,26 @@
 
 | Column           | Type       | Options           |
 |------------------|------------|-------------------|
-| purchase_history | text       | null: false       |
-| item_id          | references | foreign_key: true |
-| user_id          | references | foreign_key: true |
+| item             | references | foreign_key: true |
+| user             | references | foreign_key: true |
 
 ### Association
 
 - belongs_to :item
 - has_one : address
+- belongs_to :user
 
 ## address table
 
-| Column      | Type       | Options           |
-|-------------|------------|-------------------|
-| address     | text       | null: false       |
-| items_id    | references | foreign_key: true |
-| user_id     | references | foreign_key: true |
+| Column        | Type       | Options           |
+|---------------|------------|-------------------|
+| postal_code   | string     | null: false       |
+| prefectures   | string     | null: false       |
+| municipality  | string     | null: false       |
+| address       | string     | null: false       |
+| building_name | string     | null: false       |
+| phone_number  | string     | null: false       |
+| order         | references | foreign_key: true |
 
 ### Association
 - belongs_to :order
