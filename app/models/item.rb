@@ -9,21 +9,25 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping
   belongs_to_active_hash :status
 
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :price, presence: true
-  validates :status_id, presence: true
-  validates :shipping_id, presence: true
-  validates :shipment_source_id, presence: true
-  validates :shipping_day_id, presence: true
-  validates :category_id, presence: true
-  validates :image, presence: true
+  with_options presence: true do
+    validates :name
+    validates :description
+    validates :price
+    validates :status_id
+    validates :shipping_id
+    validates :shipment_source_id
+    validates :shipping_day_id
+    validates :category_id
+    validates :image
+  end
 
-  validates :category_id, numericality: { other_than: 1 }
-  validates :shipment_source_id, numericality: { other_than: 1 }
-  validates :shipping_day_id, numericality: { other_than: 1 }
-  validates :shipping_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :shipment_source_id
+    validates :shipping_day_id
+    validates :shipping_id
+    validates :status_id
+  end
 
   validates :price, numericality: { only_integer: true, greater_than: 300, less_than: 9999999 }
 end
