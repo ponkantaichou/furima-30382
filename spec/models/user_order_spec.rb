@@ -56,11 +56,11 @@ RSpec.describe UserOrder, type: :model do
     end
 
     it '電話番号にハイフンが含まれている時失敗する' do
-      @user_order.phone_number = '090-2222-3333'
+      @user_order.phone_number = '090-222-33'
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include('Phone number is invalid')
     end
-
+    
     it '電話番号が12桁以上の時失敗する' do
       @user_order.phone_number = '090111111111111'
       @user_order.valid?
