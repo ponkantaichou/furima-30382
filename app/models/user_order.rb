@@ -7,7 +7,7 @@ class UserOrder
     validates :prefectures_id
     validates :municipality
     validates :address
-    validates :phone_number, format: { with: /\A\d{}\z/ }
+    validates :phone_number, format: { with: /\A\d{11}\z/ }
     validates :token
   end
 
