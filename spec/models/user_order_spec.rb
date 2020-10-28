@@ -7,11 +7,11 @@ RSpec.describe UserOrder, type: :model do
   describe '商品の購入' do
     context '商品登録に成功する時' do
       it '入力項目が全て正しく入力された時、登録に成功する' do
-        @user_order.valid?
+        expect(@user_order).to be_valid
       end
       it '建物名が空でも成功する時' do
         @user_order.building_name = ''
-        @user_order.valid?
+        expect(@user_order).to be_valid
       end
     end
   end
