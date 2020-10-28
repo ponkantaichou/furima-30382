@@ -9,6 +9,10 @@ RSpec.describe UserOrder, type: :model do
       it '入力項目が全て正しく入力された時、登録に成功する' do
         @user_order.valid?
       end
+      it '建物名が空でも成功する時' do
+        @user_order.building_name = ''
+        @user_order.valid?
+      end
     end
   end
 
@@ -65,6 +69,12 @@ RSpec.describe UserOrder, type: :model do
       @user_order.phone_number = '090111111111111'
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include('Phone number is invalid')
+    end
+
+    it '都道府県のIDが１を選択れた時失敗する' do
+      @user_order.prefectures_id = 1
+      @user_order.valid?
+      expect(@user_order.errors.full_messages).to include('Prefectures must be other than 1')
     end
   end
 end
